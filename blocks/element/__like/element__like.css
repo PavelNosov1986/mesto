@@ -1,10 +1,10 @@
-.elemen__like {
+.element__like {
     cursor: pointer;
     background: none;
     border: none;
     transition: opacity 1s;
 }
 
-.elemen__like:hover {
+.element__like:hover {
     opacity: 0.5;
 }

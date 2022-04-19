@@ -1,12 +1,14 @@
 .profile__edit-button {
-    background: none;
+    display: flex;
+    background: url(../../../images/edit-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     border: 1px solid #FFFFFF;
     cursor: pointer;
-    position: absolute;
     width: 24px;
     height: 24px;
-    right: 0;
-    top: 37px;
+    margin-left: 18px;
+    margin-top: 37px;
     transition: opacity 1s;
 }
 
@@ -14,15 +16,10 @@
     opacity: 0.6;
 }
 
-@media (max-width:920px) {
-    .profile__edit-button {
-        right: -15px;
-    }
-}
-
 @media (max-width: 445px) {
     .profile__edit-button {
-        right: 15px;
-        top: 28px;
+        margin-left: 9px;
+        width: 18px;
+        height: 18px;
     }
 }

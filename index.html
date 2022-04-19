@@ -17,16 +17,14 @@
             <div class="profile__avatar-info">
                 <img src="./images/Avatar.jpg" alt="Аватар" class="profile__avatar">
                 <div class="profile__info">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <div class="profile__name-edit-button">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" type="button"></button>
+                    </div>
                     <p class="profile__about-me">Исследователь океана</p>
-                    <button class="profile__edit-button">
-                        <img src="./images/edit-button.svg" alt="Редактировать">
-                    </button>
                 </div>
             </div>
-            <button class="profile__add-button">
-                <img src="./images/add-button.svg" alt="Добавить">
-            </button>
+            <button class="profile__add-button" type="button"></button>
         </section>
         <section class="cards">
             <ul class="elements">
@@ -34,72 +32,42 @@
                     <img src="./images/karachayevsk.jpg" alt="Карачаевск" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like">
-                            <img src="./images/like.svg" alt="Сердечко">
-                        </button>
-                        <button class="element__like-active">
-                            <img src="./images/like-active.svg" alt="Сердечко черное">
-                        </button>
+                        <button class="element__like" type="submit"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img src="./images/MountElbrus.jpg" alt="Гора Эльбрус" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like">
-                            <img src="./images/like.svg" alt="Сердечко">
-                        </button>
-                        <button class="element__like-active">
-                            <img src="./images/like-active.svg" alt="Сердечко черное">
-                        </button>
+                        <button class="element__like" type="submit"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img src="./images/Dombay.jpg" alt="Домбай" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like">
-                            <img src="./images/like.svg" alt="Сердечко">
-                        </button>
-                        <button class="element__like-active">
-                            <img src="./images/like-active.svg" alt="Сердечко черное">
-                        </button>
+                        <button class="element__like" type="submit"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img src="./images/MountElbrus.jpg" alt="Гора Эльбрус" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like">
-                            <img src="./images/like.svg" alt="Сердечко">
-                        </button>
-                        <button class="element__like-active">
-                            <img src="./images/like-active.svg" alt="Сердечко черное">
-                        </button>
+                        <button class="element__like" type="submit"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img src="./images/Dombay.jpg" alt="Домбай" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like">
-                            <img src="./images/like.svg" alt="Сердечко">
-                        </button>
-                        <button class="element__like-active">
-                            <img src="./images/like-active.svg" alt="Сердечко черное">
-                        </button>
+                        <button class="element__like" type="submit"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img src="./images/karachayevsk.jpg" alt="Карачаевск" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <button class="element__like">
-                            <img src="./images/like.svg" alt="Сердечко">
-                        </button>
-                        <button class="element__like-active">
-                            <img src="./images/like-active.svg" alt="Сердечко черное">
-                        </button>
+                        <button class="element__like" type="submit"></button>
                     </div>
                 </li>
             </ul>
@@ -112,7 +80,7 @@
         <div class="popup__container">
             <button class="popup__close"> </button>
             <h2 class="popup__edit">Редактировать профиль</h2>
-            <form class="popup__form">
+            <form class="popup__form" name="popup__form">
                 <input class="popup__input" type="text" id="name" name="name" value="">
                 <input class="popup__input" type="text" id="description" name="description" value="">
                 <button class="popup__save" type="submit">Сохранить</button>

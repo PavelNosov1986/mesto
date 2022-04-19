@@ -13,6 +13,7 @@
   margin-top: 15px;
   margin-bottom: 25px;
   box-shadow: none;
+  border: none;
 }
 
 .popup__save:hover {

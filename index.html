@@ -19,66 +19,31 @@
                 <div class="profile__info">
                     <div class="profile__name-edit-button">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" type="button"></button>
+                        <button class="profile__edit-button" onclick="popupOpenToggleEdit()" type="button"></button>
                     </div>
                     <p class="profile__about-me">Исследователь океана</p>
                 </div>
             </div>
-            <button class="profile__add-button" type="button"></button>
+            <button class="profile__add-button" onclick="popupOpenToggleAddCards()" type="button"></button>
         </section>
         <section class="cards">
-            <ul class="elements">
+            <template class="template">
                 <li class="element">
-                    <img src="./images/karachayevsk.jpg" alt="Карачаевск" class="element__image">
+                    <img alt="Достопримечательности" class="element__image">
                     <div class="element__description">
-                        <h2 class="element__title">Карачаевск</h2>
+                        <h2 class="element__title"></h2>
                         <button class="element__like" type="button"></button>
                     </div>
                 </li>
-                <li class="element">
-                    <img src="./images/MountElbrus.jpg" alt="Гора Эльбрус" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="element">
-                    <img src="./images/Dombay.jpg" alt="Домбай" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="element">
-                    <img src="./images/MountElbrus.jpg" alt="Гора Эльбрус" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="element">
-                    <img src="./images/Dombay.jpg" alt="Домбай" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </li>
-                <li class="element">
-                    <img src="./images/karachayevsk.jpg" alt="Карачаевск" class="element__image">
-                    <div class="element__description">
-                        <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <button class="element__like" type="button"></button>
-                    </div>
-                </li>
-            </ul>
+            </template>
         </section>
     </main>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup" id="edit">
         <div class="popup__container">
-            <button class="popup__close" type="button"> </button>
+            <button class="popup__close" onclick="popupClose('edit')" id="close-edit"type="button"> </button>
             <h2 class="popup__edit">Редактировать профиль</h2>
             <form class="popup__form" name="popup__form">
                 <input class="popup__input" type="text" id="name" name="name" value="">
@@ -86,7 +51,20 @@
                 <button class="popup__save" type="submit">Сохранить</button>
             </form>
         </div>
+    </div> 
+
+    <div class="popup" id="add-cards">
+        <div class="popup__container">
+            <button class="popup__close" onclick="popupClose('add-cards')" id="close-add-cards" type="button"> </button>
+            <h2 class="popup__edit">Новое место</h2>
+            <form class="popup__form" name="popup__form">
+                <input class="popup__input" type="text" id="title" name="title" value="Название">
+                <input class="popup__input" type="text" id="link-image" name="link-image" value="Ссылка на картинку">
+                <button class="popup__save" type="submit">Создать</button>
+            </form>
+        </div>
     </div>
+
     <script src="./scripts/srcipt.js"></script>
 </body>
 

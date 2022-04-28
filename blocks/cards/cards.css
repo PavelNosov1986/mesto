@@ -1,4 +1,4 @@
-.elements {
+.cards {
     display: grid;
     justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));

@@ -19,21 +19,21 @@
                 <div class="profile__info">
                     <div class="profile__name-edit-button">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button" onclick="popupOpenToggleEdit()" type="button"></button>
+                        <button class="profile__edit-button" type="button"></button>
                     </div>
                     <p class="profile__about-me">Исследователь океана</p>
                 </div>
             </div>
-            <button class="profile__add-button" onclick="popupOpenToggleAddCards()" type="button"></button>
+            <button class="profile__add-button" type="button"></button>
         </section>
         <section class="cards">
             <template class="template">
                 <li class="element">
-                    <button class="element__delete" onclick="deleteCard(this)" type="button"></button>
-                    <img src="#" alt="Места России" onclick="openPopupImage(this)" class="element__image">
+                    <button class="element__delete" type="button"></button>
+                    <img src="#" alt="Места России" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Название места</h2>
-                        <button class="element__like" onclick="likeActive(this)" type="button"></button>
+                        <button class="element__like" type="button"></button>
                     </div>
                 </li>
             </template>
@@ -44,18 +44,19 @@
     </footer>
     <div class="popup" id="edit">
         <div class="popup__container">
-            <button class="popup__close" onclick="popupClose('edit')" id="close-edit" type="button"> </button>
+            <button class="popup__close" id="close-edit" type="button"> </button>
             <h2 class="popup__edit">Редактировать профиль</h2>
             <form class="popup__form" name="popup__form">
-                <input class="popup__input" type="text" id="name" name="name" value="">
-                <input class="popup__input" type="text" id="description" name="description" value="">
+                <input class="popup__input" type="text" id="name" name="name" value="Жак-Ив Кусто">
+                <input class="popup__input" type="text" id="description" name="description"
+                    value="Исследователь океана">
                 <button class="popup__save" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
     <div class="popup" id="add-cards">
         <div class="popup__container">
-            <button class="popup__close" onclick="popupClose('add-cards')" id="close-add-cards" type="button"> </button>
+            <button class="popup__close" id="close-add-cards" type="button"> </button>
             <h2 class="popup__edit">Новое место</h2>
             <form class="popup__form" id="popup__form-Add-card" name="popup__form">
                 <input class="popup__input" type="text" id="title" name="title" value="Название">
@@ -64,9 +65,9 @@
             </form>
         </div>
     </div>
-    <div class="popup" id="image">
+    <div class="popup popup_for-image" id="image">
         <div class="popup__container-image">
-            <button class="popup__close" onclick="popupClose('image')" id="close-image" type="button"> </button>
+            <button class="popup__close" id="close-image" type="button"> </button>
             <img src="#" alt="Места России" class="popup__image">
             <h2 class="popup__image-title">Название места</h2>
         </div>

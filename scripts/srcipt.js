@@ -73,7 +73,7 @@ buttonOpenPopupAddCards.addEventListener('click', () => openPopup(popupAddcards)
 // Закрытие попапа - редактирование профиля
 buttonClosePopupEdit.addEventListener('click', () => closePopup(popupEdit));
 
-// Закрытие попапа - редактирование профиля
+// Закрытие попапа - добавления карточек
 buttonClosePopupAddCards.addEventListener('click', () => closePopup(popupAddcards));
 
 // Закрытие попапа - картинка в размере 75% дисплея

@@ -82,10 +82,13 @@ buttonClosePopupImage.addEventListener('click', () => closePopup(popupImage));
 // Функция редактирования профиля
 function handleSubmitEditProfile(event) {
   event.preventDefault();
+
   nameProfileEdit.textContent = nameInput.value;
   jobProfileEdit.textContent = jobInput.value;
 
   closePopup(popupEdit);
+
+  event.target.reset();
 }
 
 formEdit.addEventListener('submit', handleSubmitEditProfile);
@@ -100,6 +103,7 @@ const generateCard = (cardData) => {
   const cardImage = newCard.querySelector('.element__image');
 
   cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
 
   // Находим в DOM название карточки
   const cardName = newCard.querySelector('.element__title');
@@ -117,6 +121,8 @@ const generateCard = (cardData) => {
   cardImage.addEventListener('click', function () {
     titlePopupImage.textContent = cardName.textContent;
     imagePopupImage.src = cardImage.currentSrc;
+
+    imagePopupImage.alt = cardName.innerText;
 
     openPopup(popupImage);
   });
@@ -143,11 +149,15 @@ initialCards.forEach((cardData) => {
 // Функция добавления карточки пользователем
 const handleSubmitAddCard = (event) => {
   event.preventDefault();
+
   renderCard({
     link: linkAddCard.value,
     name: inputAddCard.value
   });
+
   closePopup(popupAddcards);
+
+  event.target.reset();
 };
 
 formAddCard.addEventListener('submit', handleSubmitAddCard);

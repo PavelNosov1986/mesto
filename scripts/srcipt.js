@@ -1,31 +1,30 @@
 // Массив начальных карточек при открытии страницы
 const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
+  name: 'Архыз',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+},
+{
+  name: 'Челябинская область',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+},
+{
+  name: 'Иваново',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+},
+{
+  name: 'Камчатка',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+},
+{
+  name: 'Холмогорский район',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+},
+{
+  name: 'Байкал',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+}
 ];
 
-const popup = document.querySelector('.popup');
 const popupEdit = document.getElementById('edit');
 const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
 
@@ -47,36 +46,53 @@ const jobInput = document.getElementById('description');
 const nameProfileEdit = document.querySelector('.profile__name');
 const jobProfileEdit = document.querySelector('.profile__about-me');
 
-const cards = document.querySelector('.cards');
+const card = document.querySelector('.cards');
 const template = document.querySelector('.template').content;
 
 const inputAddCard = document.getElementById('title');
 const linkAddCard = document.getElementById('link-image');
 const formAddCard = document.getElementById('popup__form-Add-card');
 
+const buttonAddCard = document.getElementById('submit-card');
+
 // Функция открытия попапов
 function openPopup(element) {
+
+  nameInput.value = nameProfileEdit.textContent;
+  jobInput.value = jobProfileEdit.textContent;
+
   element.classList.add('popup_opened');
+  document.addEventListener('keydown', heandleClosePopupEsc);
+  document.addEventListener('click', heandleClosePopupOverlay);
 }
 
 // Функция закрытия попапов
 function closePopup(element) {
   element.classList.remove('popup_opened');
+  document.removeEventListener('keydown', heandleClosePopupEsc);
+
+  if (element === popupAddcards)
+  buttonAddCard.disabled = true;
+  buttonAddCard.classList.add('popup__save_inactive');
 }
 
-// Функция закрытия попапов overlay и esc
-const heandleClosePopup = (evt) => {
+// Функция закрытия попапов esc
+const heandleClosePopupEsc = (evt) => {
   const openedPopup = document.querySelector('.popup_opened');
 
-  if ((openedPopup && evt.key === 'Escape') || evt.target === openedPopup) {
+  if (openedPopup && evt.key === 'Escape') {
     closePopup(openedPopup);
   }
 };
 
-// Закрытие попапов при overlay и esc
-document.addEventListener('keydown', heandleClosePopup);
-document.addEventListener('click', heandleClosePopup);
+// Функция закрытия попапов overlay 
+const heandleClosePopupOverlay = (evt) => {
+  const openedPopup = document.querySelector('.popup_opened');
 
+  if (evt.target === openedPopup) {
+    closePopup(openedPopup);
+  }
+};
 
 // Открытие попапа - редактирование профиля
 buttonOpenPopupEdit.addEventListener('click', () => openPopup(popupEdit));
@@ -100,8 +116,7 @@ function handleSubmitEditProfile(event) {
   jobProfileEdit.textContent = jobInput.value;
 
   closePopup(popupEdit);
-
-  event.target.reset();
+  //event.target.reset();
 }
 
 formEdit.addEventListener('submit', handleSubmitEditProfile);
@@ -153,7 +168,7 @@ const generateCard = (cardData) => {
 
 // Отрисовка карточек
 const renderCard = (cardData) => {
-  cards.prepend(generateCard(cardData));
+  card.prepend(generateCard(cardData));
 };
 initialCards.forEach((cardData) => {
   renderCard(cardData);

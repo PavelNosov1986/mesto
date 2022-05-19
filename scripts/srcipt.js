@@ -25,7 +25,7 @@ const initialCards = [{
   }
 ];
 
-//const popup = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 const popupEdit = document.getElementById('edit');
 const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
 
@@ -64,6 +64,20 @@ function closePopup(element) {
   element.classList.remove('popup_opened');
 }
 
+// Функция закрытия попапов overlay и esc
+const heandleClosePopup = (evt) => {
+  const openedPopup = document.querySelector('.popup_opened');
+
+  if ((openedPopup && evt.key === 'Escape') || evt.target === openedPopup) {
+    closePopup(openedPopup);
+  }
+};
+
+// Закрытие попапов при overlay и esc
+document.addEventListener('keydown', heandleClosePopup);
+document.addEventListener('click', heandleClosePopup);
+
+
 // Открытие попапа - редактирование профиля
 buttonOpenPopupEdit.addEventListener('click', () => openPopup(popupEdit));
 
@@ -82,7 +96,6 @@ buttonClosePopupImage.addEventListener('click', () => closePopup(popupImage));
 // Функция редактирования профиля
 function handleSubmitEditProfile(event) {
   event.preventDefault();
-
   nameProfileEdit.textContent = nameInput.value;
   jobProfileEdit.textContent = jobInput.value;
 

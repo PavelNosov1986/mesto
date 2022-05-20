@@ -1,28 +1,28 @@
 // Массив начальных карточек при открытии страницы
 const initialCards = [{
-  name: 'Архыз',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-},
-{
-  name: 'Челябинская область',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-},
-{
-  name: 'Иваново',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-},
-{
-  name: 'Камчатка',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-},
-{
-  name: 'Холмогорский район',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-},
-{
-  name: 'Байкал',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
 ];
 
 const popupEdit = document.getElementById('edit');
@@ -55,25 +55,24 @@ const formAddCard = document.getElementById('popup__form-Add-card');
 
 const buttonAddCard = document.getElementById('submit-card');
 
-// Функция открытия попапов
+// Общая функция для открытия попапов 
 function openPopup(element) {
-
-  nameInput.value = nameProfileEdit.textContent;
-  jobInput.value = jobProfileEdit.textContent;
-
   element.classList.add('popup_opened');
   document.addEventListener('keydown', heandleClosePopupEsc);
   document.addEventListener('click', heandleClosePopupOverlay);
+}
+
+// Функция открытия попапа Edit
+function openPopupEdit() {
+  nameInput.value = nameProfileEdit.textContent;
+  jobInput.value = jobProfileEdit.textContent;
+  openPopup(popupEdit);
 }
 
 // Функция закрытия попапов
 function closePopup(element) {
   element.classList.remove('popup_opened');
   document.removeEventListener('keydown', heandleClosePopupEsc);
-
-  if (element === popupAddcards)
-  buttonAddCard.disabled = true;
-  buttonAddCard.classList.add('popup__save_inactive');
 }
 
 // Функция закрытия попапов esc
@@ -95,7 +94,7 @@ const heandleClosePopupOverlay = (evt) => {
 };
 
 // Открытие попапа - редактирование профиля
-buttonOpenPopupEdit.addEventListener('click', () => openPopup(popupEdit));
+buttonOpenPopupEdit.addEventListener('click', () => openPopupEdit());
 
 // Oткрытие попапа - добавления карточек
 buttonOpenPopupAddCards.addEventListener('click', () => openPopup(popupAddcards));
@@ -184,6 +183,8 @@ const handleSubmitAddCard = (event) => {
   });
 
   closePopup(popupAddcards);
+
+  disableSubmitButton(buttonAddCard);
 
   event.target.reset();
 };

@@ -6,16 +6,27 @@ const hasInvalidInput = (inputList) => {
         } else {
             return true;
         }
-    })
+    });
 };
+
+// Функция отключения кнопки
+function disableSubmitButton(buttonElement) {
+    buttonElement.disabled = true;
+    buttonElement.classList.add('popup__save_inactive');
+}
+
+// Функция включения кнопки
+function enableSubmitButton(buttonElement) {
+    buttonElement.disabled = false;
+    buttonElement.classList.remove('popup__save_inactive');
+}
+
 //Отключаем и включаем кнопки
 const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
-        buttonElement.disabled = true;
-        buttonElement.classList.add('popup__save_inactive');
+        disableSubmitButton(buttonElement);
     } else {
-        buttonElement.disabled = false;
-        buttonElement.classList.remove('popup__save_inactive');
+        enableSubmitButton(buttonElement);
     }
 };
 

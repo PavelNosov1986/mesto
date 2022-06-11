@@ -26,6 +26,7 @@
             </div>
             <button class="profile__add-button" type="button"></button>
         </section>
+
         <section class="cards">
             <template class="template">
                 <li class="element">
@@ -38,6 +39,8 @@
                 </li>
             </template>
         </section>
+
+
     </main>
     <footer class="footer">
         <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
@@ -50,14 +53,14 @@
 
             <form class="popup__form" id="popup__form-Edit" name="popup__form" novalidate>
                 <label class="popup__field-input">
-                    <input class="popup__input" type="text" id="name" name="name" value="Жак-Ив Кусто" placeholder="Имя" required
-                        minlength="2" maxlength="40">
+                    <input class="popup__input" type="text" id="name" name="name" value="Жак-Ив Кусто" placeholder="Имя"
+                        required minlength="2" maxlength="40">
                     <span class="popup__input-error" id="error-name"></span>
                 </label>
 
                 <label class="popup__field-input">
-                    <input class="popup__input" type="text" id="description" name="description" value="Исследователь океана"  placeholder="О себе"
-                        required minlength="2" maxlength="200">
+                    <input class="popup__input" type="text" id="description" name="description"
+                        value="Исследователь океана" placeholder="О себе" required minlength="2" maxlength="200">
                     <span class="popup__input-error" id="error-description"></span>
                 </label>
 
@@ -97,8 +100,9 @@
             <h2 class="popup__image-title">Название места</h2>
         </div>
     </div>
-    <script src="./scripts/srcipt.js"></script>
-    <script src="./scripts/validate.js"></script>
+    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./scripts/Card.js"></script>
+    <script type="module" src="./scripts/FormValidator.js"></script>
 </body>
 
 </html>

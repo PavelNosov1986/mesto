@@ -103,11 +103,6 @@ const heandleClosePopupOverlay = (evt) => {
     }
 };
 
-// Функция добаления лайка
-function putLike(element) {
-    element.classList.toggle('element__like_active');
-};
-
 // Общая функция для открытия попапов 
 function openPopup(element) {
     element.classList.add('popup_opened');
@@ -154,7 +149,7 @@ formEdit.addEventListener('submit', handleSubmitEditProfile);
 
 // Создаем шаблон карточки
 function createCard(data) {
-    const cardElement = new Card(data, '.template', handleOpenImagePopup, putLike);
+    const cardElement = new Card(data, '.template', handleOpenImagePopup);
     return cardElement.generateCard(data);
 }
 

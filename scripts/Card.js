@@ -1,10 +1,9 @@
 export class Card {
-  constructor(data, cardSelector, handleOpenImagePopup, putLike) {
+  constructor(data, cardSelector, handleOpenImagePopup) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleOpenImagePopup = handleOpenImagePopup;
-    this._putLike = putLike;
   }
 
   // Получаем разметку из template
@@ -20,7 +19,7 @@ export class Card {
     // Добавим данные
     this._elementTitle = this._element.querySelector(".element__title").textContent = this._name;
     this._elementImage = this._element.querySelector(".element__image").src = this._link;
-    this._deleteButtonCard = this._element.querySelector(".element__delete");
+    this._buttonDeleteCard = this._element.querySelector(".element__delete");
     this._likeButtonCard = this._element.querySelector(".element__like");
     // Добавим обработчики
     this._setEventListeners();
@@ -28,16 +27,28 @@ export class Card {
     return this._element;
   }
 
+  // Добаление лайка
+  _putLike() {
+    this._likeButtonCard.classList.toggle('element__like_active');
+  }
+
+  // Удаление карточки
+  _deleteCard() {
+    this._element.remove();
+  }
+
   // Набор обработчиков
   _setEventListeners() {
     // Лайк
-    this._element.querySelector(".element__like").addEventListener('click', () => {
-      this._putLike(this._likeButtonCard);
+    this._likeButtonCard.addEventListener('click', () => {
+      this._putLike();
     });
+
     // Удаление карточки
-    this._element.querySelector(".element__delete").addEventListener('click', () => {
-      this._element.remove();
+    this._buttonDeleteCard.addEventListener('click', () => {
+      this._deleteCard();
     });
+
     // Открываем картинку в размере 75% дисплея
     this._element.querySelector(".element__image").addEventListener('click', () => {
       this._handleOpenImagePopup(this._name, this._link);

@@ -1,53 +1,63 @@
-export default class Card {
-  constructor({
-    data,
-    handleCardClick
-  }, cardSelector) {
-    this._title = data.name;
+export class Card {
+  constructor(data, cardSelector, handleCardClick) {
+    this._name = data.name;
     this._link = data.link;
-    this._cardContainer = document.querySelector(cardSelector);
+    this._cardSelector = cardSelector;
+    
     this._handleCardClick = handleCardClick;
+
   }
+
+  // Получаем разметку из template 
   _getTemplate() {
-    const cardTemplate = this._cardContainer.content
-      .querySelector(".element")
-      .cloneNode(true);
-    return cardTemplate;
+    const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
+    return cardElement;
   }
 
-  _handleDeliteCard(evt) {
-    evt.target.closest('.element').remove();
-  }
+  // Генерируем карточку 
+  generateCard() {
+    // Запишем разметку в приватное поле _element.  
+    this._element = this._getTemplate();
 
-  _handleLikeCard(evt) {
-    evt.target.classList.toggle('element__like_active');
-  }
+    // Добавим данные 
+    this._elementTitle = this._element.querySelector(".element__title").textContent = this._name;
+    this._elementImage = this._element.querySelector(".element__image").src = this._link;
+    this._buttonDeleteCard = this._element.querySelector(".element__delete");
+    this._likeButtonCard = this._element.querySelector(".element__like");
 
-  _setEventListeners() {
-    //Функция лайков
-    this._card
-      .querySelector('.element__like')
-      .addEventListener("click", this._handleLikeCard);
-
-    //Функция удаления карточек
-    this._card
-      .querySelector('.element__delete')
-      .addEventListener("click", this._handleDeliteCard);
-
-    this._newCardImage.addEventListener("click", () => {
-      this._handleCardClick(this._title, this._link);
-    });
-  }
-
-  generateNewCard() {
-    this._card = this._getTemplate();
-    this._card.querySelector('.element__title').textContent = this._title;
-    this._newCardImage = this._card.querySelector('.element__image');
-    this._newCardImage.src = this._link;
-    this._newCardImage.alt = this._title;
-
+    // Добавим обработчики 
     this._setEventListeners();
 
-    return this._card;
+    // Вернём элемент наружу 
+    return this._element;
+  }
+
+  // Добаление лайка 
+  _putLike() {
+    this._likeButtonCard.classList.toggle('element__like_active');
+  }
+
+  // Удаление карточки 
+  _deleteCard() {
+    this._element.remove();
+  }
+
+  // Набор обработчиков 
+  _setEventListeners() {
+
+    // Лайк 
+    this._likeButtonCard.addEventListener('click', () => {
+      this._putLike();
+    });
+
+    // Удаление карточки 
+    this._buttonDeleteCard.addEventListener('click', () => {
+      this._deleteCard();
+    });
+
+    // Открываем картинку в размере 75% дисплея 
+    this._element.querySelector(".element__image").addEventListener('click', () => {
+      this._handleCardClick();
+    });
   }
 }

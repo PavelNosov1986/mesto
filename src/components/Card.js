@@ -21,7 +21,9 @@ export class Card {
 
     // Добавим данные 
     this._elementTitle = this._element.querySelector(".element__title").textContent = this._name;
-    this._elementImage = this._element.querySelector(".element__image").src = this._link;
+    this._elementImage = this._element.querySelector(".element__image");
+    this._elementImage.src = this._link;
+    this._elementImage.alt = this._name;
     this._buttonDeleteCard = this._element.querySelector(".element__delete");
     this._likeButtonCard = this._element.querySelector(".element__like");
 

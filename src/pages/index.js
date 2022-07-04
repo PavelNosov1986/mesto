@@ -92,16 +92,12 @@ function createCard(data) {
   return cardElement.generateCard(data);
 }
 
-// Отрисовываем карточки   
-function renderCard(data, cardContainer) {
-  const newCard = createCard(data);
-  cardContainer.prepend(newCard);
-}
-
 // Создаём первоначальные карточки(из первоначального массива) 
 const section = new Section({
   items: initialCards,
-  renderer: renderCard
+  renderer: (data) => {
+    section.addItem(createCard(data));
+  }
 }, '.cards');
 
 section.rendererItems();

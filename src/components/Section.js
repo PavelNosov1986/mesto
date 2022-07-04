@@ -10,7 +10,7 @@ export class Section {
 
     rendererItems() {
         this._items.forEach(data => {
-            this._renderer(data, this._container);
+            this._renderer(data);
         });
     }
 

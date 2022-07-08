@@ -15,7 +15,10 @@
     <main class="content">
         <section class="profile">
             <div class="profile__avatar-info">
-                <img src="<%=require('./images/Avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+                <div class="profile__container-img">
+                    <img src="<%=require('./images/Avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+                    <button title="Загрузить новый аватар" class="profile__update-avatar"></button>
+                </div>
                 <div class="profile__info">
                     <div class="profile__name-edit-button">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -34,7 +37,10 @@
                     <img src="#" alt="Места России" class="element__image">
                     <div class="element__description">
                         <h2 class="element__title">Название места</h2>
-                        <button class="element__like" type="button"></button>
+                        <div class="elemments__like-counter">
+                            <button class="element__like" type="button"></button>
+                            <span class="element__counter" id="counter"></span>
+                        </div>
                     </div>
                 </li>
             </template>
@@ -60,7 +66,7 @@
                         value="Исследователь океана" placeholder="О себе" required minlength="2" maxlength="200">
                     <span class="popup__input-error" id="error-description"></span>
                 </label>
-                <button class="popup__save" id="submit-profile" type="submit">Сохранить</button>
+                <button class="popup__save" id="submitProfile" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
@@ -80,7 +86,7 @@
                         placeholder="Ссылка на картинку" required>
                     <span class="popup__input-error" id="error-link-image"></span>
                 </label>
-                <button class="popup__save" id="submit-card" type="submit">Создать</button>
+                <button class="popup__save" id="submitCard" type="submit">Создать</button>
             </form>
         </div>
     </div>
@@ -92,6 +98,30 @@
             <h2 class="popup__image-title">Название места</h2>
         </div>
     </div>
+
+    <div class="popup" id="confirmDelete">
+        <div class="popup__container">
+            <button class="popup__close" id="deleteCard" type="button"> </button>
+            <h2 class="popup__confirm-title">Вы уверены?</h2>
+            <button class="popup__confirm-delete" id="submitConfirmDelete" type="button">Да</button>
+        </div>
+    </div>
+
+    <div class="popup" id="updataAvatarForm">
+        <div class="popup__container">
+            <button class="popup__close" id="updataAvatarForm" type="button"> </button>
+            <h2 class="popup__avatar-title">Обновить аватар</h2>
+            <form class="popup__form" id="formAvatarUpdata" name="popup__formAvatar" novalidate>
+                <label class="popup__field-input">
+                    <input class="popup__input" type="url" id="linkAvatar" name="linkImageAvatar"
+                        placeholder="Ссылка на аватар" required>
+                    <span class="popup__input-error" id="error-linkAvatar"></span>
+                </label>
+                <button class="popup__save popup__save_avatar" id="submitSaveAvatar" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
 
 </body>
 

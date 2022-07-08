@@ -36,7 +36,6 @@ export class FormValidator {
     } else {
       this._hideInputError(formInput);
     }
-
   }
 
   _hasInvalidInput() {

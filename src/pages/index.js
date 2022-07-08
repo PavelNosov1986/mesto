@@ -25,7 +25,6 @@ import {
 } from "../components/UserInfo.js";
 
 import {
-  initialCards,
   buttonOpenPopupEdit,
   buttonOpenPopupAddCards,
   buttonClosePopupEdit,
@@ -34,8 +33,19 @@ import {
   formAddCard,
   nameInput,
   jobInput,
-  validationSetup
+  validationSetup,
+  buttonUpdateNewAvatar,
+  formUpdateAvatar,
+  buttoPopupSaveEdit,
+  buttoPopupSaveAddCard
 } from "../utils/constants.js";
+
+import {
+  cardsApi
+} from "../api/cards";
+import {
+  usersApi
+} from "../api/users";
 
 const validateFormProfile = new FormValidator(validationSetup, formEdit);
 validateFormProfile.enableValidation();
@@ -43,25 +53,8 @@ validateFormProfile.enableValidation();
 const validateFormCard = new FormValidator(validationSetup, formAddCard);
 validateFormCard.enableValidation();
 
-// Открытие попапа - редактирование профиля 
-buttonOpenPopupEdit.addEventListener('click', () => openPopupEdit());
-
-// Открытие попапа - добавления карточки
-buttonOpenPopupAddCards.addEventListener('click', () => {
-  popupAddCard.open();
-  validateFormCard.resetError();
-});
-
-// Закрытие попапа - редактирование профиля 
-buttonClosePopupEdit.addEventListener('click', () => popupProfileEdit.close());
-
-// Закрытие попапа - добавления карточек 
-buttonClosePopupAddCards.addEventListener('click', () => popupAddCard.close());
-
-const userInfo = new UserInfo({
-  nameSelector: '.profile__name',
-  jobSelector: '.profile__about-me'
-});
+const validateFormAvatarUpdate = new FormValidator(validationSetup, formUpdateAvatar);
+validateFormAvatarUpdate.enableValidation();
 
 // Функция открытия попапа Edit 
 function openPopupEdit() {
@@ -75,15 +68,52 @@ function openPopupEdit() {
   popupProfileEdit.open();
 }
 
+const userInfo = new UserInfo({
+  nameSelector: '.profile__name',
+  jobSelector: '.profile__about-me'
+});
+
+usersApi.fetchGetMe().then((res) => {
+  //console.log(res);
+  userInfo.setUserInfo(res.name, res.about, res.avatar);
+});
+
 // Функция редактирования профиля 
 function handleSubmitEditProfile(data) {
-  const {
-    name,
-    description
-  } = data;
-  userInfo.setUserInfo(name, description);
-  popupProfileEdit.close();
+  
+  buttoPopupSaveEdit.textContent = "Сохранение...";
+
+  usersApi.fetchUpdateMe({
+    name: data.name,
+    about: data.description
+  }).then((res) => {
+    userInfo.setUserInfo(res.name, res.about, res.avatar);
+    buttoPopupSaveEdit.textContent = "Сохранение";
+    popupProfileEdit.close();
+  });
+
 }
+
+// Открытие попапа - редактирование профиля 
+buttonOpenPopupEdit.addEventListener('click', () => openPopupEdit());
+
+// Открытие попапа - добавления карточки
+buttonOpenPopupAddCards.addEventListener('click', () => {
+  popupAddCard.open();
+  validateFormCard.resetError();
+});
+
+//  Открытие попапа - смены аватара
+buttonUpdateNewAvatar.addEventListener('click', () => {
+  popupAvatarUpdate.open();
+  validateFormAvatarUpdate.resetError();
+});
+
+// Закрытие попапа - редактирование профиля 
+buttonClosePopupEdit.addEventListener('click', () => popupProfileEdit.close());
+
+// Закрытие попапа - добавления карточек 
+buttonClosePopupAddCards.addEventListener('click', () => popupAddCard.close());
 
 // Создаем шаблон карточки 
 function createCard(data) {
@@ -92,29 +122,48 @@ function createCard(data) {
   return cardElement.generateCard(data);
 }
 
-// Создаём первоначальные карточки(из первоначального массива) 
+// Создаём первоначальные карточки
 const section = new Section({
-  items: initialCards,
   renderer: (data) => {
     section.addItem(createCard(data));
   }
 }, '.cards');
 
-section.rendererItems();
+cardsApi.fetchGetCards().then((res) => {
+    section._items = res;
+  section.rendererItems();
+});
 
+// Добавляем картоку пользователем
 const handleSubmitAddCard = (data) => {
-  const newCard = createCard({
+  buttoPopupSaveAddCard.textContent = "Сохранение..."
+  cardsApi.fetchPostCards({
     name: data["title"],
     link: data["linkImage"]
+  }).then((res) => {
+    section.addItem(createCard(res));
+    buttoPopupSaveAddCard.textContent = "Сохранение"
+    popupAddCard.close();
+  });  
+};
+
+// Меняем аватар
+const handleSubmitUpdate = () => {
+  const url = document.querySelector('#linkAvatar').value;
+  usersApi.fetchUpdateAvatar({
+    avatar: url
+  }).then((res) => {
+    userInfo.setUserInfo(res.name, res.about, res.avatar);
   });
-  section.addItem(newCard);
-  popupAddCard.close();
+  popupAvatarUpdate.close();
 };
 
 const popupImage = new PopupWithImage('.popup_for-image');
 const popupAddCard = new PopupWithForm('#add-cards', handleSubmitAddCard);
 const popupProfileEdit = new PopupWithForm('#edit', handleSubmitEditProfile);
+const popupAvatarUpdate = new PopupWithForm('#updataAvatarForm', handleSubmitUpdate);
 
 popupImage.setEventListeners();
 popupAddCard.setEventListeners();
 popupProfileEdit.setEventListeners();
+popupAvatarUpdate.setEventListeners();

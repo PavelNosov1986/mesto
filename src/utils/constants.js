@@ -1,36 +1,3 @@
-// Массив начальных карточек при открытии страницы 
-
-export const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 export const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
 
 export const buttonOpenPopupAddCards = document.querySelector('.profile__add-button');
@@ -43,6 +10,16 @@ export const formAddCard = document.getElementById('popup__form-Add-card');
 
 export const nameInput = document.getElementById('name');
 export const jobInput = document.getElementById('description');
+
+export const buttonUpdateNewAvatar = document.querySelector('.profile__update-avatar');
+
+export const formUpdateAvatar = document.getElementById('formAvatarUpdata');
+
+export const buttoPopupSaveEdit = document.getElementById('submitProfile');
+
+export const buttoPopupSaveAddCard = document.getElementById('submitCard');
+
+
 
 export const validationSetup = {
   inputSelector: '.popup__input',

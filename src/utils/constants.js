@@ -15,12 +15,6 @@ export const buttonUpdateNewAvatar = document.querySelector('.profile__update-av
 
 export const formUpdateAvatar = document.getElementById('formAvatarUpdata');
 
-export const buttoPopupSaveEdit = document.getElementById('submitProfile');
-
-export const buttoPopupSaveAddCard = document.getElementById('submitCard');
-
-
-
 export const validationSetup = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save',

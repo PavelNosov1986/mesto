@@ -103,13 +103,15 @@
         <div class="popup__container">
             <button class="popup__close" id="deleteCard" type="button"> </button>
             <h2 class="popup__confirm-title">Вы уверены?</h2>
-            <button class="popup__confirm-delete" id="submitConfirmDelete" type="button">Да</button>
+            <form class="popup__form" id="formConfirmDelete" name="popup__formAvatar" novalidate>
+            <button class="popup__confirm-delete" id="submitConfirmDelete" type="submit">Да</button>
+            </form>
         </div>
     </div>
 
     <div class="popup" id="updataAvatarForm">
         <div class="popup__container">
-            <button class="popup__close" id="buttonUpdataAvatarForm" type="button"> </button>
+            <button class="popup__close" id="buttonCloseUpdataAvatarForm" type="button"> </button>
             <h2 class="popup__avatar-title">Обновить аватар</h2>
             <form class="popup__form" id="formAvatarUpdata" name="popup__formAvatar" novalidate>
                 <label class="popup__field-input">

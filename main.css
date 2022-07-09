@@ -43,7 +43,7 @@
 .popup__field-input{position:relative;width:100%}
 .popup__field-input_invalid .popup__input-error{visibility:visible}.popup__field-input_invalid .popup__input{border-bottom:1px solid red}
 .popup__input-error{color:red;font-size:12px;font-weight:400;left:0;line-height:15px;position:absolute;top:32px}
-.popup__save_inactive{background:#e5e5e5}
+.popup__save_inactive{background:#e5e5e5;cursor:default}
 .popup__avatar-title{color:#000;font-size:24px;font-style:normal;font-weight:900;line-height:29px;margin-bottom:54px;margin-top:34px;max-width:358px;width:100%}@media (max-width:590px){.popup__avatar-title{font-size:18px;line-height:22px;margin-bottom:75px;margin-top:25px;max-width:238px}}
 .popup__save_avatar{margin-bottom:36px;margin-top:18px}
 .element__delete-active{visibility:visible}

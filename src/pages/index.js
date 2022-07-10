@@ -46,7 +46,7 @@ import {
   Api
 } from "../components/Api.js";
 
-const apiHelper = new Api();
+const apiHelper = new Api("https://mesto.nomoreparties.co/v1/cohort-44/", "1258d110-8ca8-495c-a7c0-b616ac51df70");
 
 const validateFormProfile = new FormValidator(validationSetup, formEdit);
 validateFormProfile.enableValidation();
@@ -74,27 +74,37 @@ const userInfo = new UserInfo({
   jobSelector: '.profile__about-me'
 });
 
-
 let currentUserId = "";
 
-apiHelper.fetchGetMe().then((res) => {
-  userInfo.setUserInfo(res.name, res.about, res.avatar);
-  currentUserId = res._id;
-});
-
+Promise.all([ 
+  apiHelper.fetchGetMe(),
+  apiHelper.fetchGetCards()
+])
+.then((values)=>{ 
+  userInfo.setUserInfo(values[0].name,values[0].about, values[0].avatar);
+  currentUserId =values[0]._id;
+  section._items = values[1];
+  section.rendererItems();
+})
+.catch((err)=>{ 
+  console.error("There was an error!", error);
+}); 
 
 // Функция редактирования профиля 
 function handleSubmitEditProfile(data) {
   popupProfileEdit.renderLoading(true);
 
   apiHelper.fetchUpdateMe({
-      name: data.name,
-      about: data.description
-    })
+    name: data.name,
+    about: data.description
+  })
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
       popupProfileEdit.close();
-    }).finally(() => {
+    }).catch(error => {
+      console.error("There was an error!", error);
+    })
+    .finally(() => {
       popupProfileEdit.renderLoading(false);
     });
 }
@@ -130,21 +140,29 @@ function createCard(data) {
           if (res)
             cardElement.removeCard();
           popupDeleteCard.close();
+        }).catch(error => {
+          console.error("There was an error!", error);
         });
       });
-    }, () => {
-      if (cardElement._likeButtonCard.classList.contains('element__like_active')) {
+    },
+    () => {
+      if (cardElement._isLiked) {      
         apiHelper.fetchDeleteLikeCards(data._id).then((res) => {
-          cardElement._likesElement.textContent = res.likes.length > 0 ? res.likes.length : "";
-          cardElement._likeButtonCard.classList.toggle('element__like_active');
+          cardElement._likes = res.likes.length;
+          cardElement.updateLikes();
+        }).catch(error => {
+          console.error("There was an error!", error);
         });
-      } else {
+      } else {       
         apiHelper.fetchAddLikeCards(data._id).then((res) => {
-          cardElement._likesElement.textContent = res.likes.length;
-          cardElement._likeButtonCard.classList.toggle('element__like_active');
+          cardElement._likes = res.likes.length;          
+          cardElement.updateLikes();                  
+        }).catch(error => {
+          console.error("There was an error!", error);
         });
       }
-    });
+    }
+  );
   return cardElement.generateCard(data);
 }
 
@@ -154,10 +172,6 @@ const section = new Section({
     section.addItem(createCard(data));
   }
 }, '.cards');
-apiHelper.fetchGetCards().then((res) => {
-  section._items = res;
-  section.rendererItems();
-});
 
 // Добавляем карточку пользователем
 const handleSubmitAddCard = (data) => {
@@ -168,6 +182,8 @@ const handleSubmitAddCard = (data) => {
   }).then((res) => {
     section.addItem(createCard(res));
     popupAddCard.close();
+  }).catch(error => {
+    console.error("There was an error!", error);
   }).finally(() => {
     popupAddCard.renderLoading(false);
   });
@@ -179,12 +195,14 @@ const handleSubmitUpdate = () => {
   const url = document.querySelector('#linkAvatar').value;
 
   apiHelper.fetchUpdateAvatar({
-      avatar: url
-    })
+    avatar: url
+  })
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
       popupAvatarUpdate.renderLoading(false);
       popupAvatarUpdate.close();
+    }).catch(error => {
+      console.error("There was an error!", error);
     });
 };
 
@@ -193,7 +211,6 @@ const popupAddCard = new PopupWithForm('#add-cards', handleSubmitAddCard);
 const popupProfileEdit = new PopupWithForm('#edit', handleSubmitEditProfile);
 const popupAvatarUpdate = new PopupWithForm('#updataAvatarForm', handleSubmitUpdate);
 const popupDeleteCard = new PopupWithConfirmation('#confirmDelete');
-
 
 popupImage.setEventListeners();
 popupAddCard.setEventListeners();

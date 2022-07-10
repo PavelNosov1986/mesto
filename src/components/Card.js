@@ -9,7 +9,8 @@ export class Card {
     this._currentOwnerId = currneOwnerId;
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
-    this._setLike = setLike;   
+    this._setLike = setLike;
+    this._isLiked = false;
   }
 
   // Получаем разметку из template 
@@ -30,8 +31,6 @@ export class Card {
     this._elementImage.alt = this._name;
     this._buttonDeleteCard = this._element.querySelector(".element__delete");
 
-    // 44d705ac118f4c83b55183a0
-
     this._ownerId == this._currentOwnerId ?
       this._buttonDeleteCard.classList.add("element__delete-active") :
       this._buttonDeleteCard.classList.add("element__delete-inactive");
@@ -39,17 +38,23 @@ export class Card {
     this._likeButtonCard = this._element.querySelector(".element__like");
     this._likesElement = this._element.querySelector(".element__counter");
     this._likesElement.textContent = this._likes > 0 ? this._likes : "";
-    
+
     // Добавим обработчики 
     this._setEventListeners();
     // Вернём элемент наружу 
     return this._element;
-  }  
+  }
 
   removeCard() {
     this._element.remove();
     this._element = null;
-  }  
+  }
+
+  updateLikes() {
+    this._likesElement.textContent = this._likes == 0 ? "" : this._likes;
+    this._isLiked = !this._isLiked;
+    this._likeButtonCard.classList.toggle('element__like_active');
+  }
 
   // Набор обработчиков 
   _setEventListeners() {
